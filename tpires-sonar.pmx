@@ -1,0 +1,27 @@
+---
+name: tpires-sonar
+description: Pulled together tpires/docker-sonar in Panamax. SonarQube offers static
+  analysis and reporting platform for many languages.
+keywords: sonar, static code analysis
+type: Default
+documentation: ''
+images:
+- name: tpires_sonar-mysql_latest
+  source: tpires/sonar-mysql:latest
+  category: Sonar
+  type: Default
+  ports:
+  - host_port: '3306'
+    container_port: '3306'
+    proto: TCP
+- name: tpires_sonar-server
+  source: tpires/sonar-server:latest
+  category: Sonar
+  type: Default
+  ports:
+  - host_port: '9000'
+    container_port: '9000'
+    proto: TCP
+  links:
+  - service: tpires_sonar-mysql_latest
+    alias: db
